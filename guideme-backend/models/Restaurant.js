@@ -30,6 +30,10 @@ const RestSchema = new mongoose.Schema({
     type: String,
     required: true,
   }],
+  reviews: [{
+    type: Map,
+    of: String,
+  }],
 });
 
 mongoose.plugin(uniqueValidatore);

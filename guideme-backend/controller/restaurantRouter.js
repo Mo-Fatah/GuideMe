@@ -1,20 +1,20 @@
-const foodRouter = require('express').Router();
+const restaurantRouter = require('express').Router();
 const Restaurant = require('../models/Restaurant');
 const logger = require('../utils/logger');
 
-foodRouter.get('/', async (request, response) => {
+restaurantRouter.get('/', async (request, response) => {
   const result = await Restaurant.find({});
   response.json(result);
 });
 
-foodRouter.get('/:id', async (request, response) => {
-  const id = request.params.id;
+restaurantRouter.get('/:id', async (request, response) => {
+  const { id } = request.params;
   const result = await Restaurant.findById(id);
   response.json(result);
 });
 
-foodRouter.post('/', async (request, response) => {
-  const body = request.body;
+restaurantRouter.post('/', async (request, response) => {
+  const { body } = request;
   if (!body.name || !body.governorate || !body.city
     || !body.neighborhood || !body.address || !body.foodTypes) {
     return response.status(400).json({
@@ -26,4 +26,4 @@ foodRouter.post('/', async (request, response) => {
   return response.json(newRestaurant);
 });
 
-module.exports = foodRouter;
+module.exports = restaurantRouter;

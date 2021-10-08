@@ -1,11 +1,11 @@
 require('dotenv').config();
 
-/*eslint-disable*/
+const { SECRET } = process.env;
 const PORT = process.env.PORT || 3003;
-const MONGODB_URI = process.env.MONGODB_URI;
-/*eslint-disable*/
+const { MONGODB_URI } = process.env;
 
 module.exports = {
   PORT,
   MONGODB_URI,
+  SECRET,
 };

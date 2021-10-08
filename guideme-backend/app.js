@@ -1,9 +1,13 @@
 const express = require('express');
+require('express-async-errors');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const logger = require('./utils/logger');
 const config = require('./utils/config');
-const foodRouter = require('./controller/food');
+const logger = require('./utils/logger');
+const RestaurantRouter = require('./controller/restaurantRouter');
+const userRouter = require('./controller/userRouter');
+const loginRouter = require('./controller/login');
+const middleware = require('./utils/middleware');
 
 const app = express();
 
@@ -15,5 +19,13 @@ mongoose.connect(config.MONGODB_URI)
 
 app.use(cors());
 app.use(express.json());
-app.use('/api/food', foodRouter);
+app.use(middleware.requestLogger);
+app.use('/api/food', RestaurantRouter);
+app.use('/api/user', userRouter);
+app.use('/api/login', loginRouter);
+app.use(middleware.unknownEndpoint);
+app.use(middleware.tokenExtractor);
+app.use(middleware.userExtractor);
+app.use(middleware.errorHandler);
+
 module.exports = app;
