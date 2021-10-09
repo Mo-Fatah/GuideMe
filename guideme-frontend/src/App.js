@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import {
+  BrowserRouter as Router,
+  Switch, Route, Link
+} from 'react-router-dom'
+import LoginForm from './components/LoginForm';
+import Home from './components/Home';
 
-function App() {
+const App = () => {
+  const[ user, setUser ] = useState(null);
+
+  const padding = {
+    padding: 5,
+  }
+  const login = () => {
+    return <Link style={padding} to='/login'>login</Link>
+  }
+  const profile = () => {
+    return <Link style={padding} to='/profile'>Profile</Link>
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <div>
+      <Router>
+        <div>
+          <Link style={padding} to='/'>home</Link>
+          { user !== null ? profile() : login() }
+        </div>
+        <Switch>
+          <Route path='/login'>
+            <LoginForm setUser={setUser}/> 
+          </Route>
+          <Route path='/profile'>
 
+          </Route>
+          <Route path='/'>
+            <Home />
+          </Route>
+        </Switch>
+     </Router>
+      
+    </div>
+  )
+}
 export default App;
