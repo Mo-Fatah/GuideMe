@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { Switch, Route, Link, useHistory } from 'react-router-dom'
 import LoginForm from './components/LoginForm';
 import Home from './components/Home';
-import SearchByFilters from './components/SearchByFilters';
-
+import SearchByFilters from './components/search/SearchByFilters';
+import { getByName, getAll } from './services/food';
 const App = () => {
   const [ user, setUser ] = useState(null);
   const history = useHistory();
@@ -18,7 +18,6 @@ const App = () => {
   const padding = {
     padding: 5,
   }
-
   const login = () => {
     return <Link style={padding} to='/login'>login</Link>
   }
@@ -63,9 +62,7 @@ const App = () => {
           <Route path='/'>
             <Home />
           </Route>
-          
         </Switch>
-      
     </div>
   )
 }
