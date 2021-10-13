@@ -14,6 +14,7 @@ loginRouter.post('/', async (request, response) => {
     response.status(401).send({
       error: 'invalid credentials',
     }).end();
+    return;
   }
 
   const userForToken = {
