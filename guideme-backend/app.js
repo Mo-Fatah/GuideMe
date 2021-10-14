@@ -7,6 +7,7 @@ const logger = require('./utils/logger');
 const RestaurantRouter = require('./controller/restaurantRouter');
 const userRouter = require('./controller/userRouter');
 const loginRouter = require('./controller/login');
+const reviewRouter = require('./controller/reviewRouter');
 const middleware = require('./utils/middleware');
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(middleware.requestLogger);
 app.use('/api/food', RestaurantRouter);
 app.use('/api/user', userRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/review', reviewRouter);
 app.use(middleware.unknownEndpoint);
 app.use(middleware.tokenExtractor);
 app.use(middleware.userExtractor);

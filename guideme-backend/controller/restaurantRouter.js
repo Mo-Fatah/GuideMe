@@ -9,7 +9,10 @@ restaurantRouter.get('/', async (request, response) => {
 
 restaurantRouter.get('/:id', async (request, response) => {
   const { id } = request.params;
-  const result = await Restaurant.findById(id);
+  const result = await Restaurant.findById(id)
+    .populate('reviews')
+    .populated('user');
+
   response.json(result);
 });
 
@@ -21,11 +24,13 @@ restaurantRouter.post('/', async (request, response) => {
       error: 'missing fields',
     });
   }
+
   body.name = body.name.toLowerCase().trim();
   body.governorate = body.governorate.toLowerCase().trim();
   body.city = body.city.toLowerCase().trim();
   body.neighborhood = body.neighborhood.toLowerCase().trim();
-  body.foodTypes = body.foodTypes.map((type) => type.toLowerCase());
+  body.foodTypes = body.foodTypes.map((type) => type.toLowerCase().trim());
+
   const newRestaurant = new Restaurant(body);
   await newRestaurant.save();
   return response.json(newRestaurant);

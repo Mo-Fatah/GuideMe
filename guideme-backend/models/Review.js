@@ -1,45 +1,28 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-const RestSchema = new mongoose.Schema({
-  name: {
+const reviewSchema = new mongoose.Schema({
+  title: {
     type: String,
     required: true,
   },
-  owner: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    required: true,
   },
-  governorate: {
+  content: {
     type: String,
     required: true,
   },
-  city: {
-    type: String,
-    required: true,
-  },
-  neighborhood: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String,
+  rate: {
+    type: Number,
     require: true,
   },
-  foodTypes: [{
-    type: String,
-    required: true,
-  }],
-  reviews: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Review',
-  }],
 });
 
 mongoose.plugin(uniqueValidator);
-
 /* eslint-disable */
-mongoose.set('toJSON', {
+reviewSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
@@ -48,4 +31,4 @@ mongoose.set('toJSON', {
 })
 /* eslint-enable */
 
-module.exports = mongoose.model('Restaurant', RestSchema);
+module.exports = mongoose.model('Review', reviewSchema);
