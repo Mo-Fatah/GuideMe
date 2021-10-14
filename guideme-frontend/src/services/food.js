@@ -13,6 +13,11 @@ export const getAllRests = async params => {
   
   return result.data;
 }
+
+export const getById = async id => {
+  const result = await axios.get(`${baseUrl}/${id}`);
+  return result.data;
+}
 /*export const getAllInGov = async governorate => {
   const result = await axios.get(baseUrl);
   result.data = result.data.filter((rest) =>

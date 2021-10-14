@@ -3,7 +3,8 @@ import { Switch, Route, Link, useHistory } from 'react-router-dom'
 import LoginForm from './components/LoginForm';
 import Home from './components/Home';
 import SearchByFilters from './components/search/SearchByFilters';
-import { getByName, getAll } from './services/food';
+import RestaurantView from './components/restaurant/RestaurantView';
+
 const App = () => {
   const [ user, setUser ] = useState(null);
   const history = useHistory();
@@ -51,6 +52,10 @@ const App = () => {
           </Route>
 
           <Route path='/profile'>
+          </Route>
+          
+          <Route path='/food/:id'>
+            <RestaurantView />
           </Route>
 
           <Route path='/logout' render={() => handleLogOut()} />

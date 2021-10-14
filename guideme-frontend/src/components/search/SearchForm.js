@@ -14,9 +14,11 @@ const SearchForm = ({ search }) => {
     if (governorate.trim()) queryParams.governorate = governorate.trim();
     if (city.trim()) queryParams.city = city.trim();
     if (neighborhood.trim()) queryParams.neighborhood = neighborhood.trim();
+
     search(queryParams);
     setCity(''); setGovern(''); setName(''); setNeighborhood('');
   }
+
   return (
     <form onSubmit={ handleSubmit }>
       <div>
