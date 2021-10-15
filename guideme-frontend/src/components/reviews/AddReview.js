@@ -33,6 +33,7 @@ const AddReview = ({ id, reviews, setReviews }) => {
       rate,
     }
     const result = await addReview(newReview, id);
+    console.log(result);
     setTitle(''); 
     setContent('');
     setMessage('');
