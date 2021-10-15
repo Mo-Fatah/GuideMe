@@ -17,9 +17,10 @@ reviewRouter.post('/:id', async (request, response) => {
   body.user = user._id; //eslint-disable-line
   const review = new Review(body);
   await review.save();
+  await review.populate('user');
   restaurant.reviews = restaurant.reviews ? restaurant.reviews.concat(review) : [review];
   await restaurant.save();
-  return response.json(restaurant);
+  return response.json(review);
 });
 
 module.exports = reviewRouter;

@@ -15,7 +15,6 @@ restaurantRouter.get('/:id', async (request, response) => {
       model: 'Review',
       populate: { path: 'user', model: 'User' },
     });
-  console.log(result);
   response.json(result);
 });
 
