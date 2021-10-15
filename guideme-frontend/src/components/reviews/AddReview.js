@@ -10,6 +10,7 @@ const AddReview = ({ id, reviews, setReviews }) => {
   
   const handleSubmission = async (event) => {
     event.preventDefault();
+
     if (rate < 1 || rate > 10) {
       setMessage('rate should be between 1 and 10 inclusive');
       setTimeout(() => {
@@ -31,14 +32,12 @@ const AddReview = ({ id, reviews, setReviews }) => {
       content,
       rate,
     }
-    await addReview(newReview, id);
+    const result = await addReview(newReview, id);
     setTitle(''); 
     setContent('');
     setMessage('');
     setRate(0);
-    newReview.user = {username: user}; // it works, however it is a dumb hack. may be there is a better approach
-    setReviews(reviews.concat(newReview));
-  
+    setReviews(reviews.concat(result));
   }
   
   return (
