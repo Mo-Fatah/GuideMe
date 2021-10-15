@@ -21,7 +21,7 @@ reviewRouter.post('/:id', async (request, response) => {
   restaurant.reviews = await restaurant.reviews.concat(savedReview._id); //eslint-disable-line
   await restaurant.save();
   await savedReview.populate('user');
-  return response.json(review);
+  return response.json(savedReview);
 });
 
 module.exports = reviewRouter;
