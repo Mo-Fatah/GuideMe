@@ -10,9 +10,12 @@ restaurantRouter.get('/', async (request, response) => {
 restaurantRouter.get('/:id', async (request, response) => {
   const { id } = request.params;
   const result = await Restaurant.findById(id)
-    .populate('reviews')
-    .populated('user');
-
+    .populate({
+      path: 'reviews',
+      model: 'Review',
+      populate: { path: 'user', model: 'User' },
+    });
+  console.log(result);
   response.json(result);
 });
 
