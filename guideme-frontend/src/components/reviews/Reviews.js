@@ -4,8 +4,13 @@ const Reviews = ({ initialReviews, id }) => {
   const [ reviews, setReviews ] = useState(initialReviews); 
   return (
     <div>
+      <h3>Reviews: </h3>
       <ul>
-        {reviews ? reviews.map((review) => <Review key={review.id} review={review}  />) : null }    
+        { 
+          reviews.length === 0 ? 
+            <p>No reviews yet</p>
+          : reviews.map((review) => <Review key={review.id} review={review}  />) 
+        }    
       </ul>
       <br/>
       { window.localStorage.getItem('Guideme-app-user') 
@@ -17,7 +22,7 @@ const Reviews = ({ initialReviews, id }) => {
 const Review = ({ review }) => {
   return (
     <li>
-      <h3>{review.title}</h3>
+      <h4>{review.title}</h4>
       <p>{review.user.username} : {review.content}</p>
       <p>{review.rate}</p>
     </li>

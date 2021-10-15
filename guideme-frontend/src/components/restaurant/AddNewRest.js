@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { addNewRest } from "../../services/food";
-
+import { useHistory } from "react-router-dom";
 const AddNewRest = () => {
   const [ name, setName ] = useState('');
   const [ governorate, setGovern ] = useState('');
@@ -10,6 +10,7 @@ const AddNewRest = () => {
   const [ foodTypes, setFoodTypes ] = useState([]);
   const [ foodType, setFoodType ] = useState('');
   const [ message, setMessage ] = useState(null);
+  const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,15 +30,26 @@ const AddNewRest = () => {
       address,
       foodTypes,
     }
-
     await addNewRest(restaurant);
-
+    
+    setName('');
+    setGovern('');
+    setCity('');
+    setAddress('');
+    setFoodType('');
+    setFoodTypes([]);
+    setMessage(`Thanks for Your Contribution! You will be Directed to the home page`);
+    setTimeout(() => {
+      setMessage(null);
+      history.push('/');
+    }, 2000);
   }
 
 
   const addType = (event) => {
     event.preventDefault();
     setFoodTypes(foodTypes.concat(foodType));
+    setFoodType('');
   }
   return (
     <div>
@@ -88,6 +100,7 @@ const AddNewRest = () => {
           {foodTypes.toString()}
         </div>
         {message}
+        <br />
         <button type='submit'>Add Restaurant</button>
       </form>
     </div>
