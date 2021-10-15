@@ -4,6 +4,7 @@ import LoginForm from './components/LoginForm';
 import Home from './components/Home';
 import SearchByFilters from './components/search/SearchByFilters';
 import RestaurantView from './components/restaurant/RestaurantView';
+import AddNewRest from './components/restaurant/AddNewRest';
 
 const App = () => {
   const [ user, setUser ] = useState(null);
@@ -56,6 +57,10 @@ const App = () => {
           
           <Route path='/food/:id'>
             <RestaurantView />
+          </Route>
+
+          <Route path='/new-restaurant'>
+            <AddNewRest/>
           </Route>
 
           <Route path='/logout' render={() => handleLogOut()} />

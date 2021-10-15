@@ -6,7 +6,7 @@ const AddReview = ({ id, reviews, setReviews }) => {
   const [ content, setContent ] = useState('');
   const [ rate, setRate ] = useState(0);
   const [ message, setMessage ] = useState(null);
-  const user = JSON.parse(window.localStorage.getItem('Guideme-app-user'));
+  const user = JSON.parse(window.localStorage.getItem('Guideme-app-user')).username;
   
   const handleSubmission = async (event) => {
     event.preventDefault();
@@ -31,12 +31,13 @@ const AddReview = ({ id, reviews, setReviews }) => {
       content,
       rate,
     }
-    const result =await addReview(newReview, id);
+    await addReview(newReview, id);
     setTitle(''); 
     setContent('');
     setMessage('');
     setRate(0);
-    setReviews(reviews.concat(result));
+    newReview.user = {username: user}; // it works, however it is a dumb hack. may be there is a better approach
+    setReviews(reviews.concat(newReview));
   
   }
   

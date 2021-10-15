@@ -18,6 +18,11 @@ export const getById = async id => {
   const result = await axios.get(`${baseUrl}/${id}`);
   return result.data;
 }
+
+export const addNewRest = async newRest => {
+  const result = await axios.post(baseUrl, newRest);
+  return result.data
+}
 /*export const getAllInGov = async governorate => {
   const result = await axios.get(baseUrl);
   result.data = result.data.filter((rest) =>

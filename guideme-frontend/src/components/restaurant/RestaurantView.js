@@ -7,7 +7,7 @@ const RestaurantView = () => {
   const id = useParams().id;
   const [ restaurant, setRestaurant ] = useState(null);
  
-  useEffect(  () => {
+  useEffect(() => {
     const fetchRestaurant = async () => {
       const result = await getById(id);
       setRestaurant(result);
@@ -18,6 +18,7 @@ const RestaurantView = () => {
   if (!restaurant) {
     return <div>loading...</div>
   }
+
   return (
     <div>
       <h1>{restaurant.name}</h1>
@@ -28,7 +29,7 @@ const RestaurantView = () => {
         </ul>
       </p>
       <div>
-        <Reviews reviews={restaurant.reviews} id={restaurant.id}/>
+        <Reviews initialReviews={restaurant.reviews} id={restaurant.id}/>
       </div>
     </div>
   )

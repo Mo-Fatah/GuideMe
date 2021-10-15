@@ -5,7 +5,7 @@ const Reviews = ({ initialReviews, id }) => {
   return (
     <div>
       <ul>
-        { reviews.map((review) => <Review key={review.id} review={review} />) }    
+        {reviews ? reviews.map((review) => <Review key={review.id} review={review}  />) : null }    
       </ul>
       <br/>
       { window.localStorage.getItem('Guideme-app-user') 

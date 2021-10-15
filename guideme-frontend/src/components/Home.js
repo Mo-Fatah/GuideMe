@@ -20,7 +20,7 @@ const Home = () => {
         <Link style={padding} to='/search'>search by location</Link>
         <br/>
         <div >
-          <strong>Help our community with your feedback!</strong>
+          <strong>Help our community to grow!</strong>
           <br/>
           <Link stile = {padding} to='/new-restaurant'>add a Restaurant</Link>
         </div>
