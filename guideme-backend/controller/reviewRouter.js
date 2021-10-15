@@ -13,13 +13,14 @@ reviewRouter.post('/:id', async (request, response) => {
       error: 'some/all required fields of the review are missing',
     });
   }
+
   const user = await User.findOne({ username: body.user });
   body.user = user._id; //eslint-disable-line
   const review = new Review(body);
-  await review.save();
-  await review.populate('user');
-  restaurant.reviews = restaurant.reviews ? restaurant.reviews.concat(review) : [review];
+  const savedReview = await review.save();
+  restaurant.reviews = await restaurant.reviews.concat(savedReview._id); //eslint-disable-line
   await restaurant.save();
+  await savedReview.populate('user');
   return response.json(review);
 });
 
