@@ -6,11 +6,11 @@ const Reviews = ({ initialReviews, id }) => {
     <div>
       <h3>Reviews: </h3>
       <ul>
-        { 
+        {
           reviews.length === 0 ? 
             <p>No reviews yet</p>
           : reviews.map((review) => <Review key={review.id} review={review}  />) 
-        }    
+        }
       </ul>
       <br/>
       { window.localStorage.getItem('Guideme-app-user') 
