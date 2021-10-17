@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { addNewRest } from "../../services/food";
 import { useHistory } from "react-router-dom";
+import { TextField, Button } from "@mui/material";
 const AddNewRest = () => {
   const [ name, setName ] = useState('');
   const [ governorate, setGovern ] = useState('');
@@ -45,63 +46,70 @@ const AddNewRest = () => {
     }, 2000);
   }
 
-
   const addType = (event) => {
     event.preventDefault();
     setFoodTypes(foodTypes.concat(foodType));
     setFoodType('');
   }
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div>
-          name:
-          <input 
-            value = {name}
-            onChange = { ({target}) => setName(target.value)}
-          />
-        </div>
-        <div>
-          governorate:
-          <input
-            value = {governorate}
-            onChange = { ({target}) => setGovern(target.value) }
-          />
-        </div>
-        <div>
-          city: 
-          <input 
-            value = {city}
-            onChange = { ({target}) => setCity(target.value)}
-          />
-        </div>
-        <div>
-          neighborhood
-          <input 
-            value = {neighborhood}
-            onChange = { ({target}) => setNeighborhood(target.value)}
-          />
-        </div>
-        <div>
-          address:
-          <input 
-            value = {address}
-            onChange = { ({target}) => setAddress(target.value) }
-          />
-        </div>
-        <div>
-          foodTypes:
-          <input 
-            value = {foodType}
-            onChange = { ({target}) => setFoodType(target.value)}
-          />
-          <button onClick={addType}>add type</button>
-          <br/>
-          {foodTypes.toString()}
-        </div>
+        <TextField 
+          label='Name'
+          value={name}
+          variant='outlined'
+          onChange= {({target}) => setName(target.value)}
+        />
+        <br/>
+        <TextField 
+          label='Governorate'
+          value={governorate}
+          variant='outlined'
+          onChange= {({target}) => setGovern(target.value)}
+        />
+        <br/>
+        <TextField 
+          label='City'
+          value={city}
+          variant='outlined'
+          onChange= {({target}) => setCity(target.value)}
+        />
+        <br/>
+        <TextField 
+          label='Neighbothood'
+          value={neighborhood}
+          variant='outlined'
+          onChange= {({target}) => setNeighborhood(target.value)}
+        />
+        <br/>
+         <TextField 
+          label='Adress'
+          value={address}
+          variant='outlined'
+          onChange= {({target}) => setAddress(target.value)}
+        />
+        <br/>
+        <TextField 
+          label='FoodTypes'
+          value={foodType}
+          variant='outlined'
+          onChange= {({target}) => setFoodType(target.value)}
+        />
+        <Button onClick={addType} sx={{margin:2}}>Add Type</Button>
+      
+        <br/>
+        {foodTypes.toString()}
         {message}
         <br />
-        <button type='submit'>Add Restaurant</button>
+        <Button type='submit'
+          color='success'
+          variant='contained'
+          sx={{marginTop:2}} 
+        >
+          Submit
+        </Button>
+
       </form>
     </div>
   ) 

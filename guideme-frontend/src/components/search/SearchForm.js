@@ -1,3 +1,4 @@
+import { Button, TextField } from "@mui/material";
 import { useState } from "react";
     
 const SearchForm = ({ search }) => {
@@ -20,6 +21,43 @@ const SearchForm = ({ search }) => {
   }
 
   return (
+    <form onSubmit={handleSubmit}>
+      <TextField 
+        label='Name'
+        value={name}
+        variant="outlined"
+        onChange={({target}) => setName(target.value)}
+      />
+      <TextField 
+        label='Governorate'
+        value={governorate}
+        variant="outlined"
+        onChange={({target}) => setGovern(target.value)}
+      />
+      <TextField 
+        label='City'
+        value={city}
+        variant="outlined"
+        onChange={({target}) => setCity(target.value)}
+      />
+      <TextField 
+        label='Neighborhood'
+        value={neighborhood}
+        variant="outlined"
+        onChange={({target}) => setNeighborhood(target.value)}
+      />
+      <br/>
+
+      <Button type='submit'
+        variant='contained'
+        style={{marginTop:9, background:'##B8545B'}}
+      >
+        search
+      </Button>
+    </form>  
+   
+  )
+  /*return (
     <form onSubmit={ handleSubmit }>
       <div>
         name
@@ -51,7 +89,7 @@ const SearchForm = ({ search }) => {
       </div>
       <button type='submit'>search</button>
     </form>
-  )
+  )*/
 }
 
 export default SearchForm;

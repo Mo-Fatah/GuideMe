@@ -1,3 +1,5 @@
+import { Typography, TextField, Button } from "@mui/material";
+import { Box } from "@mui/system";
 import { useState } from "react";
 import { addReview } from "../../services/review";
 
@@ -25,8 +27,6 @@ const AddReview = ({ id, reviews, setReviews }) => {
       }, 3000)
       return;
     }
-    
-    
 
     const newReview = {
       title,
@@ -45,32 +45,42 @@ const AddReview = ({ id, reviews, setReviews }) => {
   
   return (
     <div>
-      <h3>You have an experience with this restaurant ? help others with your review!</h3>
-      <form onSubmit={handleSubmission}>
-        <div>
-          review title : 
-          <input 
-            value = {title}
-            onChange = { ({target}) => setTitle(target.value) }
+      <Box sx={{marginTop:5,paddingTop:2,marginBottom:3, borderTop:1}}>
+        <Typography variant='h4' >
+          You have an experience with this restaurant ? Help others with your review!
+        </Typography>
+      </Box>
+      <Box sx={{marginBottom:10}}>
+        <form onSubmit={handleSubmission}>
+          <TextField
+            label='title'
+            value={title}
+            variant='outlined'
+            onChange={({target}) => setTitle(target.value)}
           />
-        </div>
-        <div>
-          your review :
-          <input 
-            value = {content}
-            onChange = { ({target}) => setContent(target.value) }
+          <TextField
+            label='content'
+            value={content}
+            variant='outlined'
+            onChange={({target}) => setContent(target.value)}
           />
-        </div>
-        <div>
-          rate (from 1 to 10):
-          <input
-            value = {rate}
-            onChange = { ({target}) => setRate(target.value) }
-          /> 
-        </div>
-        {message} <br/>
-        <button type='submit'>submit review</button>
-      </form>
+          <TextField
+            label='rate'
+            value={rate}
+            variant='outlined'
+            onChange={({target}) => setRate(target.value)}
+          />
+          {message}<br/>
+          <Button type='submit'
+            color='success'
+            variant='contained'
+            sx={{marginTop:2}} 
+          >
+            Submit
+          </Button>
+
+        </form>
+      </Box>
     </div>
   )
 }

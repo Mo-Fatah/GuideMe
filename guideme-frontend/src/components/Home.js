@@ -10,7 +10,7 @@ const Home = () => {
 
   return (
     <div>
-        <Typography variant='h1' align='center' >
+        <Typography variant='h1' align='center' marginTop={5} >
           GuideMe
         </Typography>
 

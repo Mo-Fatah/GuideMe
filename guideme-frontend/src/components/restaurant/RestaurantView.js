@@ -1,3 +1,5 @@
+import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router"
 import { getById } from "../../services/food";
@@ -21,13 +23,26 @@ const RestaurantView = () => {
 
   return (
     <div>
-      <h1>{restaurant.name}</h1>
-      <p>Address: {restaurant.address}</p>
-      <p> Food Types: 
+      <Typography variant='h1' marginTop={2} marginLeft={2} >
+        {restaurant.name.toUpperCase()}
+      </Typography>
+      <Box sx={{marginLeft: 3, marginBottom: 2, borderBottom:1}}>
+        <Typography variant='subtitle1'>
+          {restaurant.governorate.toUpperCase()} 
+          {', '}
+          {restaurant.city.toUpperCase()}
+          {', '}
+          {restaurant.neighborhood.toUpperCase()}
+        </Typography>
+      </Box>
+      <Box sx={{borderBottom:1}}>
+        <Typography variant='h5' >
+          Food Types:
+        </Typography> 
         <ul>
           {restaurant.foodTypes.map(type => <li>{type}</li>)}
         </ul>
-      </p>
+      </Box>
       <div>
         <Reviews initialReviews={restaurant.reviews} id={restaurant.id}/>
       </div>

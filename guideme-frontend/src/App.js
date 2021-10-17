@@ -45,7 +45,11 @@ const App = () => {
   const signup = () => {
     
     return (
-      <Button color='inherit' component={Link} to='/signup'>
+      <Button color='inherit' 
+        component={Link} 
+        to='/signup' 
+        style={{background:'#0E9E30', paddingLeft:15}} 
+      >
         New Account
       </Button>
     )
@@ -64,6 +68,7 @@ const App = () => {
         <Layout>
           <AppBar
             position='sticky'
+            style= {{marginBottom:10}}
           >
             <Toolbar>
               <Button color ='inherit'component={Link} to='/'>
