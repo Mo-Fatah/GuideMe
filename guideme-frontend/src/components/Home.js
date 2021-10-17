@@ -1,32 +1,61 @@
 import { useState } from "react";
 import AddNewRest from "./restaurant/AddNewRest";
 import { Link, Switch, Route } from "react-router-dom";
+import { Typography, Stack, Button } from "@mui/material";
+import StyledButton from "./Layout/StyledButtons";
+import ColorButton from "./Layout/ColorButton";
 
-const padding = {
-  padding: 5,
-}
+
 const Home = () => {
 
   return (
     <div>
-      <header>
-        <h1>GuideMe</h1>
-        <p>A community-driven application to help you 
-          find the best services in any place you go</p>
-      </header>
+        <Typography variant='h1' align='center' >
+          GuideMe
+        </Typography>
+
+        <Typography variant = 'subtitle1' align='center' paddingBottom={5}>
+          A community-driven application to help you 
+          find the best services in any place you go
+        </Typography>
+        
       <main>
-        what are you looking for ?
-        <br/>
-        <Link style={padding} to='/search'>search by location</Link>
-        <br/>
-        <div >
-          <strong>Help our community to grow!</strong>
+        <StyledButton images={images}/>
+          <Typography variant='h5' >
+            Help our community to grow!
+          </Typography>
           <br/>
-          <Link stile = {padding} to='/new-restaurant'>add a Restaurant</Link>
-        </div>
+          <ColorButton 
+            component={Link}
+            path='/new-restaurant'
+            text = 'Add Restaurant'
+            color='success'
+          />
       </main>
     </div>
   )
 }
+
+const images = [
+  {
+    url: './food.jpg',
+    title: 'Food',
+    width: '34%',
+    disabled: false
+  },
+  {
+    url: './car.jpg',
+    title: 'Car Rental (available soon)',
+    width: '33%',
+    disabled: true
+  },
+  {
+    url: './hotel',
+    title: 'Hotel (available soon)',
+    width: '33%',
+    disabled: true,
+  }
+
+];
 
 export default Home;

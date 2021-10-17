@@ -10,14 +10,7 @@ const AddReview = ({ id, reviews, setReviews }) => {
   
   const handleSubmission = async (event) => {
     event.preventDefault();
-
-    if (rate < 1 || rate > 10) {
-      setMessage('rate should be between 1 and 10 inclusive');
-      setTimeout(() => {
-        setMessage(null);
-      }, 3000)
-      return;
-    }
+    
     if (title.length < 1 || content.length < 1) {
       setMessage('please a write a meaningful title and content');  
       setTimeout(() => {
@@ -25,6 +18,15 @@ const AddReview = ({ id, reviews, setReviews }) => {
       }, 3000)
       return;
     }
+    if (rate < 1 || rate > 10) {
+      setMessage('rate should be between 1 and 10 inclusive');
+      setTimeout(() => {
+        setMessage(null);
+      }, 3000)
+      return;
+    }
+    
+    
 
     const newReview = {
       title,
@@ -66,7 +68,7 @@ const AddReview = ({ id, reviews, setReviews }) => {
             onChange = { ({target}) => setRate(target.value) }
           /> 
         </div>
-        {message}
+        {message} <br/>
         <button type='submit'>submit review</button>
       </form>
     </div>
