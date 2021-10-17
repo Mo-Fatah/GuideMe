@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createNew } from "../services/user";
-
+import { TextField, Button, Typography } from "@mui/material";
 const CreateNewAccount = () => {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -26,7 +26,7 @@ const CreateNewAccount = () => {
     setMessage('Great, Welcome aboard!');
     setTimeout(() => {
       history.push('/login');
-    }, 1000);
+    }, 2000);
   }
 
   return (
@@ -44,23 +44,34 @@ const CreateNewAccount = () => {
 
 const NewAccountForm = ({ username, password, setUsername, setPassword, handler }) => {
   return (
-    <form onSubmit = {handler}>
-      <div>
-        username (4 characters min.) 
-        <input 
-          value = {username}
-          onChange = { ({target}) => setUsername(target.value) }
+    <div>
+      <Typography variant='h2' sx={{marginBottom:3}}>
+        Create New Account
+      </Typography>
+      <form onSubmit = {handler}>
+        <TextField 
+          label='username (4 characters min.)'
+          value={username}
+          variant='outlined'
+          onChange= {({target}) => setUsername(target.value)}
+        /> 
+        <TextField 
+          label='password (5 characters min.)'
+          value={password}
+          variant='outlined'
+          onChange= {({target}) => setPassword(target.value)}
         />
-      </div>
-      <div>
-        password (5 characters min.)
-        <input 
-          value = {password}
-          onChange = { ({target}) => setPassword(target.value) }
-        />
-      </div>
-      <button type = 'submit'>create</button>
-    </form>
+        <br/> 
+        <Button type='submit'
+          color='success'
+          variant='contained'
+          sx={{marginTop:2}} 
+        >
+          create
+        </Button>
+
+      </form>
+    </div>
   )
 }
 

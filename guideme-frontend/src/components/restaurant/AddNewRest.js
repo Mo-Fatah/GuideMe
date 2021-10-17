@@ -109,7 +109,6 @@ const AddNewRest = () => {
         >
           Submit
         </Button>
-
       </form>
     </div>
   ) 
