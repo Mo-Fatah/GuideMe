@@ -1,4 +1,4 @@
-import { Typography, TextField, Button } from "@mui/material";
+import { Typography, TextField, Button, Alert } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { addReview } from "../../services/review";
@@ -7,24 +7,21 @@ const AddReview = ({ id, reviews, setReviews }) => {
   const [ title, setTitle ] = useState('');
   const [ content, setContent ] = useState('');
   const [ rate, setRate ] = useState(0);
-  const [ message, setMessage ] = useState(null);
+  const [ success, setSuccess ] = useState(false);
+  const [ error, setError ] = useState(null);
   const user = JSON.parse(window.localStorage.getItem('Guideme-app-user')).username;
   
   const handleSubmission = async (event) => {
     event.preventDefault();
-    
+    setSuccess(false);
+    setError(null);
+
     if (title.length < 1 || content.length < 1) {
-      setMessage('please a write a meaningful title and content');  
-      setTimeout(() => {
-        setMessage(null);
-      }, 3000)
+      setError('please write a meaningful title and content');  
       return;
     }
-    if (rate < 1 || rate > 10) {
-      setMessage('rate should be between 1 and 10 inclusive');
-      setTimeout(() => {
-        setMessage(null);
-      }, 3000)
+    if ( !(Number(rate)) || rate < 1 || rate > 10) {
+      setError('rate should be a number between 1 and 10 inclusive');
       return;
     }
 
@@ -35,12 +32,11 @@ const AddReview = ({ id, reviews, setReviews }) => {
       rate,
     }
     const result = await addReview(newReview, id);
-    console.log(result);
     setTitle(''); 
     setContent('');
-    setMessage('');
     setRate(0);
     setReviews(reviews.concat(result));
+    setSuccess(true);
   }
   
   return (
@@ -50,6 +46,18 @@ const AddReview = ({ id, reviews, setReviews }) => {
           You have an experience with this restaurant ? Help others with your review!
         </Typography>
       </Box>
+      { error ?
+        <Alert severity='error' style={{marginBottom: 10}}>
+          {error}
+        </Alert>
+        : null
+      }
+      { success ?
+        <Alert severity='success'>
+          Thanks for your Contribution!
+        </Alert>
+        : null
+      }
       <Box sx={{marginBottom:10}}>
         <form onSubmit={handleSubmission}>
           <TextField
@@ -62,15 +70,18 @@ const AddReview = ({ id, reviews, setReviews }) => {
             label='content'
             value={content}
             variant='outlined'
+            multiline
+            rows={4}
+            fullWidth
+            style={{marginTop:12, marginBottom:12}}
             onChange={({target}) => setContent(target.value)}
           />
           <TextField
-            label='rate'
+            label='rate (out of 10)'
             value={rate}
             variant='outlined'
             onChange={({target}) => setRate(target.value)}
           />
-          {message}<br/>
           <Button type='submit'
             color='success'
             variant='contained'

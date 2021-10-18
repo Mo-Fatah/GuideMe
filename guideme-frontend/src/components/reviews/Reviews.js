@@ -14,11 +14,12 @@ const Reviews = ({ initialReviews, id }) => {
           <p>No reviews yet</p>
         : <Container sx={{marginBottom:5}} >
             <Grid container spacing={2}>
-              {reviews.map((review) => 
-                <Grid item key={review.id} xs={12} md={6} lg={4}>
-                  <ReviewCard review={review}  />
-                </Grid>
-              )}
+              {
+                reviews.map((review) => 
+                  <Grid item key={review.id} xs={12} md={6} lg={4}>
+                    <ReviewCard review={review}  />
+                  </Grid>)
+              }
             </Grid> 
           </Container>
       }

@@ -5,8 +5,8 @@ const  Footer = () => {
     <footer>
       <Box
         py={{ xs: 1, sm: 1 }}
-        bgcolor="#E5EAF2"
-        color="#2173FF"
+        bgcolor="#EEEEEE"
+        color="black"
         bottom={0}
         position='fixed'
         width='100%'

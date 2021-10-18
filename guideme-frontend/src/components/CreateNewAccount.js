@@ -1,37 +1,53 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createNew } from "../services/user";
-import { TextField, Button, Typography } from "@mui/material";
+import { TextField, Button, Typography, Alert } from "@mui/material";
 const CreateNewAccount = () => {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
-  const [ message, setMessage ] = useState('');
+  const [ error, setError ] = useState(null);
+  const [ success, setSuccess ] = useState(false);
   const history = useHistory();
   const handleSubmission = async (event) => {
-
-    event.preventDefault();
+    setError(null);
+    setSuccess(false);
+    event.preventDefault(); 
     if (username.length < 4) {
-      setMessage('username should be 4 characters minimum');
+      setError('username should be 4 characters minimum');
       return;
     }
     if (password.length < 5) {
-      setMessage('password should be 5 characters minimum');
+      setError('password should be 5 characters minimum');
       return;
     }
     const result = await createNew({ username, password });
     if (result.error) {
-      setMessage('username already taken, please try a new one');
+      setError('username already taken, please try a new one');
       return;
     }
-    setMessage('Great, Welcome aboard!');
+    setSuccess(true);
     setTimeout(() => {
       history.push('/login');
-    }, 2000);
+    }, 2500);
   }
 
   return (
     <div>
-      {message}
+      <Typography variant='h2' >
+        Create New Account
+      </Typography>
+      { success ?
+        <Alert severity='success' style={{marginBottom: 15}}>
+          Great, Welcome aboard! Redirecting to login page ...
+        </Alert>
+        : null
+      }
+      { error ?
+        <Alert severity='error' style={{marginBottom: 15}}>
+          {error}
+        </Alert> 
+        : null
+      }
       <NewAccountForm username = {username} 
         password={password}
         setUsername={setUsername}
@@ -45,9 +61,6 @@ const CreateNewAccount = () => {
 const NewAccountForm = ({ username, password, setUsername, setPassword, handler }) => {
   return (
     <div>
-      <Typography variant='h2' sx={{marginBottom:3}}>
-        Create New Account
-      </Typography>
       <form onSubmit = {handler}>
         <TextField 
           label='username (4 characters min.)'

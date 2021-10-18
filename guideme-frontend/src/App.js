@@ -28,13 +28,7 @@ const App = () => {
       </Button>
     )
   }
-  const profile = () => {
-    return (
-      <Button color = 'inherit' component={Link} to='/profile'>
-        Profile
-      </Button>
-    )
-  }
+ 
   const logout = () => {
     return (
       <Button color='inherit' component={Link} to='/logout'>
@@ -76,7 +70,6 @@ const App = () => {
               </Button>
               { user === null && login() }
               { user === null && signup()}
-              { user !== null && profile() }
               { user !== null && logout() }          
             </Toolbar>
           </AppBar>
@@ -84,8 +77,6 @@ const App = () => {
           <Switch>
             <Route path='/login'>
               <LoginForm setUser={setUser} /> 
-            </Route>
-            <Route path='/profile'>
             </Route>
             <Route path='/food/:id'>
               <RestaurantView />

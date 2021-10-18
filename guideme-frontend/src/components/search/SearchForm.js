@@ -11,10 +11,10 @@ const SearchForm = ({ search }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const queryParams = {}
-    if (name.trim()) queryParams.name = name.trim();
-    if (governorate.trim()) queryParams.governorate = governorate.trim();
-    if (city.trim()) queryParams.city = city.trim();
-    if (neighborhood.trim()) queryParams.neighborhood = neighborhood.trim();
+    if (name.trim()) queryParams.name = name.toLowerCase().trim();
+    if (governorate.trim()) queryParams.governorate = governorate.toLowerCase().trim();
+    if (city.trim()) queryParams.city = city.toLowerCase().trim();
+    if (neighborhood.trim()) queryParams.neighborhood = neighborhood.toLowerCase().trim();
 
     search(queryParams);
     setCity(''); setGovern(''); setName(''); setNeighborhood('');

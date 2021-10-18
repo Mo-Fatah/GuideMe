@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { addNewRest } from "../../services/food";
 import { useHistory } from "react-router-dom";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Alert, Typography } from "@mui/material";
 const AddNewRest = () => {
   const [ name, setName ] = useState('');
   const [ governorate, setGovern ] = useState('');
@@ -11,16 +11,18 @@ const AddNewRest = () => {
   const [ foodTypes, setFoodTypes ] = useState([]);
   const [ foodType, setFoodType ] = useState('');
   const [ message, setMessage ] = useState(null);
+  const [ error, setError ] = useState(null);
   const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError(null);
+    setMessage(null);
+
     if (!city.trim() || !name.trim() || !governorate.trim() || !neighborhood.trim()
     || !address.trim() || foodTypes.length === 0) {
-      setMessage('pleae fill the missing fields');
-      setTimeout(() => {
-        setMessage(null);
-      }, 3000)
+      setError('pleae fill the missing fields');
+      return;
     }
 
     const restaurant = {
@@ -39,11 +41,7 @@ const AddNewRest = () => {
     setAddress('');
     setFoodType('');
     setFoodTypes([]);
-    setMessage(`Thanks for Your Contribution! You will be Directed to the home page`);
-    setTimeout(() => {
-      setMessage(null);
-      history.push('/');
-    }, 2000);
+    setMessage(`Thanks for Your Contribution! you can find ${restaurant.name} now in the search result`);
   }
 
   const addType = (event) => {
@@ -54,6 +52,21 @@ const AddNewRest = () => {
 
   return (
     <div>
+      <Typography variant='h2' align='center'>
+        Add a New Restaurant
+      </Typography>
+      { error ?
+        <Alert severity='error'>
+          {error}
+        </Alert>
+        : null  
+      }
+      { message ? 
+        <Alert severity='success'>
+          {message}
+        </Alert>
+        : null
+      }
       <form onSubmit={handleSubmit}>
         <TextField 
           label='Name'
@@ -100,7 +113,7 @@ const AddNewRest = () => {
       
         <br/>
         {foodTypes.toString()}
-        {message}
+        
         <br />
         <Button type='submit'
           color='success'
