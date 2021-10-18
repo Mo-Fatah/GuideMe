@@ -18,7 +18,7 @@ reviewRouter.post('/:id', async (request, response) => {
   body.user = user._id; //eslint-disable-line
   const review = new Review(body);
   const savedReview = await review.save();
-  restaurant.reviews = await restaurant.reviews.concat(savedReview._id); //eslint-disable-line
+  restaurant.reviews = restaurant.reviews.concat(savedReview._id); //eslint-disable-line
   await restaurant.save();
   await savedReview.populate('user');
   return response.json(savedReview);
