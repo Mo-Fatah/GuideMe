@@ -2,6 +2,7 @@ const express = require('express');
 require('express-async-errors');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 const config = require('./utils/config');
 const logger = require('./utils/logger');
 const RestaurantRouter = require('./controller/restaurantRouter');
@@ -26,6 +27,9 @@ app.use('/api/food', RestaurantRouter);
 app.use('/api/user', userRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/review', reviewRouter);
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 app.use(middleware.unknownEndpoint);
 app.use(middleware.tokenExtractor);
 app.use(middleware.userExtractor);
