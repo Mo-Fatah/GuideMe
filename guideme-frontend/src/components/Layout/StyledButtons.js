@@ -1,3 +1,5 @@
+/*eslint-disable*/
+// this code is mainly from MaterialUi docs 
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';

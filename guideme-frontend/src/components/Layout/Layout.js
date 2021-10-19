@@ -1,4 +1,7 @@
-import { makeStyles } from "@mui/styles";
+/*eslint-disable*/
+import { makeStyles } from '@mui/styles';
+import React from 'react';
+
 const useStyle = makeStyles(({ theme }) => {
   return {
     page: {

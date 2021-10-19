@@ -1,7 +1,9 @@
 import axios from 'axios';
+
 const baseUrl = '/api/login';
 
-export const login = async credentials => {
+// eslint-disable-next-line
+export const login = async (credentials) => {
   const result = await axios.post(baseUrl, credentials);
   return result.data;
-} 
+};
