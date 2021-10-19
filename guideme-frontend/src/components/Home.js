@@ -44,13 +44,11 @@ const images = [
     disabled: false
   },
   {
-    url: './car.jpg',
     title: 'Car Rental (available soon)',
     width: '33%',
     disabled: true
   },
   {
-    url: './hotel',
     title: 'Hotel (available soon)',
     width: '33%',
     disabled: true,
