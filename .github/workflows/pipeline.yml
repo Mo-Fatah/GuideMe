@@ -20,6 +20,20 @@ jobs:
         run: cd guideme-backend && npm install && cd .. && cd guideme-frontend && npm install && cd ..
       - name: ESlint
         run: cd guideme-backend && npm run lint && cd ../guideme-frontend && npm run lint && cd .
+      - name: Build
+        run: cd guideme-backend && npm run build:ui
+
+      - name: Deploy to Heroku
+        if: ${{ github.event_name == 'push' }} 
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "shielded-lowlands-87902" 
+          heroku_email: "mohamedabdelfatah2027@gmail.com"
+          healthcheck: "https://shielded-lowlands-87902.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
       
+ 
 
       
