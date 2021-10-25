@@ -16,12 +16,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: npm install
-        run: cd guideme-backend && npm install && cd .. && cd guideme-frontend && npm install && cd ..
-      - name: ESlint
-        run: cd guideme-backend && npm run lint && cd ../guideme-frontend && npm run lint && cd ..
-      - name: Build
-        run: cd guideme-backend && npm run build:ui && cd ..
+      #- name: npm install
+      #  run: cd guideme-backend && npm install && cd .. && cd guideme-frontend && npm install && cd ..
+      #- name: ESlint
+      #  run: cd guideme-backend && npm run lint && cd ../guideme-frontend && npm run lint && cd ..
+      #- name: Build
+      #  run: cd guideme-backend && npm run build:ui && cd ..
 
       - name: Deploy to Heroku
         if: ${{ github.event_name == 'push' }} 
@@ -30,11 +30,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "shielded-lowlands-87902" 
           heroku_email: "mohamedabdelfatah2027@gmail.com"
-          appdir: guideme-backend
-          healthcheck: "https://shielded-lowlands-87902.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
-      
+          justlogin: true
+      - run : cd guideme-backend && ls -a
  
 
       
