@@ -31,7 +31,7 @@ jobs:
           heroku_app_name: "shielded-lowlands-87902" 
           heroku_email: "mohamedabdelfatah2027@gmail.com"
           justlogin: true
-      - run: cd guideme-backend && heroku info
+      - run: cd guideme-backend && git init && git add . && git commit -m "commit" && git remote add heroku https://git.heroku.com/shielded-lowlands-87902.git && git push heroku main
  
 
       
