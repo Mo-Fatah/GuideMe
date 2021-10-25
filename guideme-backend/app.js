@@ -27,11 +27,11 @@ app.use('/api/food', RestaurantRouter);
 app.use('/api/user', userRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/review', reviewRouter);
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 app.get('/health', (request, response) => {
   response.send('ok');
+});
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 app.use(middleware.unknownEndpoint);
 app.use(middleware.tokenExtractor);
