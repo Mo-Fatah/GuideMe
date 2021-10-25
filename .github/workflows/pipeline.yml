@@ -18,3 +18,8 @@ jobs:
           node-version: '12.x'
       - name: npm install
         run: cd guideme-backend && npm install && cd .. && cd guideme-frontend && npm install && cd ..
+      - name: ESlint
+        run: cd guideme-backend && npm run lint && cd ../guideme-frontend && npm run lint && cd .
+      
+
+      
