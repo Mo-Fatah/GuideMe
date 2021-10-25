@@ -19,9 +19,9 @@ jobs:
       - name: npm install
         run: cd guideme-backend && npm install && cd .. && cd guideme-frontend && npm install && cd ..
       - name: ESlint
-        run: cd guideme-backend && npm run lint && cd ../guideme-frontend && npm run lint && cd .
+        run: cd guideme-backend && npm run lint && cd ../guideme-frontend && npm run lint && cd ..
       - name: Build
-        run: cd guideme-backend && npm run build:ui
+        run: cd guideme-backend && npm run build:ui && cd ..
 
       - name: Deploy to Heroku
         if: ${{ github.event_name == 'push' }} 
