@@ -31,7 +31,7 @@ jobs:
           heroku_app_name: "shielded-lowlands-87902" 
           heroku_email: "mohamedabdelfatah2027@gmail.com"
           justlogin: true
-      - run : cd guideme-backend && ls -a
+      - run: cd guideme-backend && heroku info
  
 
       
