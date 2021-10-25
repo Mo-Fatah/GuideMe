@@ -1,0 +1,21 @@
+name: Deployment Pipeline
+
+on: 
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+jobs:
+  simplePipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@1
+        with:
+          node-version: '12.x'
+      - name: npm install
+        run: cd guideme-backend && npm install && cd ..
+        run: cd guideme-frontend && npm install && cd ..
