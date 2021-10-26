@@ -38,7 +38,7 @@ jobs:
           heroku_email: "mohamedabdelfatah2027@gmail.com"
           appdir: "guideme-backend"
           healthcheck: "https://shielded-lowlands-87902.herokuapp.com/health"
-          checkstring: "ok"
+          checkstring: "hi"
           rollbackonhealthcheckfailed: true
       
  
