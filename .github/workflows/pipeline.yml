@@ -23,11 +23,6 @@ jobs:
       - name: Build
         run: cd guideme-backend && npm run build:ui && cd ..
       - run: cd guideme-backend/build && ls -a
-      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
-        with:
-          token: ${{ secrets.GIT_TOKEN }}
- 
-      
 
       - name: Deploy to Heroku
         if: ${{ github.event_name == 'push' }} 
