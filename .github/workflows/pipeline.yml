@@ -24,6 +24,11 @@ jobs:
       #  run: cd guideme-backend && npm run build:ui && cd ..
       - name:
         run: cd guideme-backend && git remote -v && cd ..
+      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
+        with:
+          token: ${{ secrets.GIT_TOKEN }}
+      - run: git config --list --show-origin
+ 
       
 
       - name: Deploy to Heroku
