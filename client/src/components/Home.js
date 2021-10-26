@@ -26,7 +26,7 @@ const images = [
 const Home = () => (
   <div>
     <Typography variant="h1" align="center" marginTop={5}>
-      أييييييييييييييييه عامل ايه
+      GuideMe
     </Typography>
     <Typography variant="subtitle1" align="center" paddingBottom={5}>
       A community-driven application to help you
