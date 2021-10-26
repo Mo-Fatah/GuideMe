@@ -16,12 +16,15 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: npm install
-        run: cd guideme-backend && npm install && cd .. && cd guideme-frontend && npm install && cd ..
-      - name: ESlint
-        run: cd guideme-backend && npm run lint && cd ../guideme-frontend && npm run lint && cd ..
-      - name: Build
-        run: cd guideme-backend && npm run build:ui && cd ..
+      #- name: npm install
+      #  run: cd guideme-backend && npm install && cd .. && cd guideme-frontend && npm install && cd ..
+      #- name: ESlint
+      #  run: cd guideme-backend && npm run lint && cd ../guideme-frontend && npm run lint && cd ..
+      #- name: Build
+      #  run: cd guideme-backend && npm run build:ui && cd ..
+      - name:
+        run: cd guideme-backend && git remote -v && cd ..
+      
 
       - name: Deploy to Heroku
         if: ${{ github.event_name == 'push' }} 
