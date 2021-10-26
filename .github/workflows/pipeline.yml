@@ -17,23 +17,21 @@ jobs:
         with:
           node-version: '12.x'
       - name: npm install
-        run: cd guideme-backend && npm install && cd .. && cd guideme-frontend && npm install && cd ..
+        run: npm install && cd .. && cd client && npm install && cd ..
       - name: ESlint
-        run: cd guideme-backend && npm run lint && cd ../guideme-frontend && npm run lint && cd ..
+        run: npm run lint && cd client && npm run lint && cd ..
       - name: Build
-        run: cd guideme-backend && npm run build:ui && cd ..
-      - run: cd guideme-backend/build && ls -a
+        run: npm run build:ui
 
       - name: Deploy to Heroku
         if: ${{ github.event_name == 'push' }} 
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "shielded-lowlands-87902" 
+          heroku_app_name: "pure-headland-21885" 
           heroku_email: "mohamedabdelfatah2027@gmail.com"
-          appdir: "guideme-backend"
-          healthcheck: "https://shielded-lowlands-87902.herokuapp.com/health"
-          checkstring: "hi"
+          healthcheck: "https://pure-headland-21885.herokuapp.com/health"
+          checkstring: "ok"
           rollbackonhealthcheckfailed: true
       
  
