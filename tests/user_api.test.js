@@ -21,6 +21,7 @@ test('successful login with token received', async () => {
   await api.post('/api/user').send(newUser);
   const result = await api.post('/api/login').send(newUser);
   expect(result.status).toBe(200);
+  console.log(result); // eslint-disable-line
   expect(result.body.username).toBe(newUser.username);
   expect(result.body.token).toBeDefined();
 });
