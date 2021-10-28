@@ -7,7 +7,7 @@ const api = supertest(app);
 
 beforeEach(async () => {
   await User.deleteMany({});
-});
+}, 20000);
 
 test('successful login with token received', async () => {
   const newUser = {

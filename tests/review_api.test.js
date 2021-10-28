@@ -12,7 +12,7 @@ beforeEach(async () => {
   await Review.deleteMany({});
   await Restaurant.deleteMany({});
   await User.deleteMany({});
-});
+}, 20000);
 
 test('valid user can post a review for existing restaurant', async () => {
   let result = await api.post('/api/food/').send(helper.initialRestaurants[0]);

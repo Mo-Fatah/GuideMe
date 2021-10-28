@@ -11,7 +11,7 @@ beforeEach(async () => {
   const initialRest = helper.initialRestaurants.map((rest) => new Restaurant(rest));
   const promiseArray = initialRest.map((rest) => rest.save());
   await Promise.all(promiseArray);
-});
+}, 20000);
 
 test('response is in a json format', async () => {
   await api
