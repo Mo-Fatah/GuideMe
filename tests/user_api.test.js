@@ -1,12 +1,16 @@
 const mongoose = require('mongoose');
 const supertest = require('supertest');
 const app = require('../app');
+const Restaurant = require('../models/Restaurant');
+const Review = require('../models/Review');
 const User = require('../models/User');
 
 const api = supertest(app);
 
 beforeEach(async () => {
   await User.deleteMany({});
+  await Review.deleteMany({});
+  await Restaurant.deleteMany({});
 }, 20000);
 
 test('successful login with token received', async () => {

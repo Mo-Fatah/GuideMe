@@ -2,12 +2,16 @@ const mongoose = require('mongoose');
 const supertest = require('supertest');
 const app = require('../app');
 const Restaurant = require('../models/Restaurant');
+const Review = require('../models/Review');
+const User = require('../models/User');
 const helper = require('./helper');
 
 const api = supertest(app);
 
 beforeEach(async () => {
   await Restaurant.deleteMany({});
+  await User.deleteMany({});
+  await Review.deleteMany({});
   const initialRest = helper.initialRestaurants.map((rest) => new Restaurant(rest));
   const promiseArray = initialRest.map((rest) => rest.save());
   await Promise.all(promiseArray);
