@@ -22,6 +22,7 @@ jobs:
         run: npm run test
         env:
           MONGODB_URI_TEST: ${{secrets.MONGODB_URI_TEST}}
+          SECRET: ${{secrets.SECRET}}
       - name: ESlint
         run: npm run lint && cd client && npm run lint && cd ..
       - name: Build
