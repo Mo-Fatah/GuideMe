@@ -9,7 +9,7 @@
     "build:ui": "rm -rf build && cd client && npm run build && cp -r build .. && cd ..",
     "deploy": "git add . && git commit -m uibuild && git push heroku main",
     "deploy:full": "npm run build:ui && npm run deploy",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test jest --verbose --runInBand",
     "lint": "node_modules/.bin/eslint ."
   },
   "author": "mohamed",
@@ -31,6 +31,9 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.1",
-    "eslint-plugin-react-hooks": "^1.7.0"
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "^27.3.1",
+    "supertest": "^6.1.6"
   }
+
 }
