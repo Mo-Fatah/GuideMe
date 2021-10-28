@@ -20,6 +20,8 @@ jobs:
         run: npm install && cd client && echo SKIP_PREFLIGHT_CHECK=true >> .env && npm install cd .. 
       - name: Backend Test
         run: npm run test
+        env:
+          MONGODB_URI_TEST: ${{secrets.MONGODB_URI_TEST}}
       - name: ESlint
         run: npm run lint && cd client && npm run lint && cd ..
       - name: Build
