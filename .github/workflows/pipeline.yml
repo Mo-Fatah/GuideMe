@@ -17,7 +17,9 @@ jobs:
         with:
           node-version: '12.x'
       - name: npm install
-        run: npm install && cd client && echo SKIP_PREFLIGHT_CHECK=true >> .env && npm install cd .. 
+        # the "echo" command in the next line is a workaround for a bug in the dependecy caused by babel-jest
+        # see more https://stackoverflow.com/a/57089043/12019806 
+        run: npm install && cd client && echo SKIP_PREFLIGHT_CHECK=true >> .env && npm install cd ..  
       - name: Backend Test
         run: npm run test
         env:
