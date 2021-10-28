@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const baseUrl = '/api/login';
+const baseUrl = 'http://localhost:3003/api/login';
+// const baseUrl = '/api/login';
 
 // eslint-disable-next-line
 export const login = async (credentials) => {
