@@ -10,13 +10,17 @@ const AddReview = ({ id, reviews, setReviews }) => {
   const [rate, setRate] = useState(0);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
-  const user = JSON.parse(window.localStorage.getItem('Guideme-app-user')).username;
+  const user = JSON.parse(window.localStorage.getItem('Guideme-app-user'));
 
   const handleSubmission = async (event) => {
     event.preventDefault();
     setSuccess(false);
     setError(null);
 
+    if (!user || !user.token) {
+      setError('Unable to post, make sure you are logged in');
+      return;
+    }
     if (title.length < 1 || content.length < 1) {
       setError('please write a meaningful title and content');
       return;
@@ -28,11 +32,16 @@ const AddReview = ({ id, reviews, setReviews }) => {
 
     const newReview = {
       title,
-      user,
       content,
       rate,
     };
-    const result = await addReview(newReview, id);
+    const result = await addReview(newReview, id, user.token);
+
+    if (result.error) {
+      setError('Unable to post, make sure you are logged in');
+      return;
+    }
+
     setTitle('');
     setContent('');
     setRate(0);
