@@ -34,6 +34,9 @@ const RestSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Review',
   }],
+  rate: {
+    type: Number,
+  },
 });
 
 mongoose.plugin(uniqueValidator);
