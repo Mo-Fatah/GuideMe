@@ -11,6 +11,7 @@ import RestaurantView from './components/restaurant/RestaurantView';
 import AddNewRest from './components/restaurant/AddNewRest';
 import CreateNewAccount from './components/CreateNewAccount';
 import Layout from './components/Layout/Layout';
+import Profile from './components/Profile';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -32,6 +33,11 @@ const App = () => {
   const logout = () => (
     <Button color="inherit" component={Link} to="/logout">
       logout
+    </Button>
+  );
+  const profile = () => (
+    <Button color="inherit" component={Link} to="/profile">
+      profile
     </Button>
   );
   const signup = () => (
@@ -66,6 +72,7 @@ const App = () => {
             </Button>
             { user === null && login() }
             { user === null && signup() }
+            { user !== null && profile() }
             { user !== null && logout() }
           </Toolbar>
         </AppBar>
@@ -82,6 +89,9 @@ const App = () => {
           </Route>
           <Route path="/signup">
             <CreateNewAccount />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
           <Route path="/search">
             <SearchByFilters />

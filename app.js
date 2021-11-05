@@ -23,6 +23,8 @@ app.use(express.static('build'));
 app.use(cors());
 app.use(express.json());
 app.use(middleware.requestLogger);
+app.use(middleware.tokenExtractor);
+app.use(middleware.userExtractor);
 app.use('/api/food', RestaurantRouter);
 app.use('/api/user', userRouter);
 app.use('/api/login', loginRouter);
@@ -34,8 +36,6 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 app.use(middleware.unknownEndpoint);
-app.use(middleware.tokenExtractor);
-app.use(middleware.userExtractor);
 app.use(middleware.errorHandler);
 
 module.exports = app;

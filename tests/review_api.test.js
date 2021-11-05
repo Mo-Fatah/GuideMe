@@ -17,22 +17,25 @@ beforeEach(async () => {
 test('valid user can post a review for existing restaurant', async () => {
   let result = await api.post('/api/food/').send(helper.initialRestaurants[0]);
   const newRest = result.body;
-  result = await api.post('/api/user').send({ username: 'mohamed', password: '12345' });
-  const newUser = result.body;
+  await api.post('/api/user').send({ username: 'mohamed', password: '12345' });
+  result = await api.post('/api/login').send({ username: 'mohamed', password: '12345' });
+  const loggedUser = result.body;
 
   const review = {
     title: 'title',
     content: 'good',
     rate: 4,
-    user: newUser.username,
   };
-  await api.post(`/api/review/${newRest.id}`).send(review);
+  await api
+    .post(`/api/review/${newRest.id}`)
+    .set('Authorization', `bearer ${loggedUser.token}`)
+    .send(review);
 
   const resultRest = await api.get(`/api/food/${newRest.id}`);
   const titles = resultRest.body.reviews.map((r) => r.title);
   const users = resultRest.body.reviews.map((r) => r.user.username);
   expect(titles).toContain(review.title);
-  expect(users).toContain(newUser.username);
+  expect(users).toContain(loggedUser.username);
 });
 
 afterAll(async () => {
