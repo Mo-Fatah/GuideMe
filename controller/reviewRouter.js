@@ -13,6 +13,10 @@ reviewRouter.post('/:id', async (request, response) => {
   }
 
   const restaurant = await Restaurant.findById(id);
+  restaurant.rate = restaurant.rate
+    ? (Number(restaurant.rate) * restaurant.reviews.length + Number(body.rate))
+      / (restaurant.reviews.length + 1)
+    : Number(body.rate);
   if (!body.title || !body.content || !body.rate) {
     return response
       .status(400)
@@ -20,7 +24,6 @@ reviewRouter.post('/:id', async (request, response) => {
         error: 'some/all required fields of the review are missing',
       });
   }
-
   body.user = user._id; //eslint-disable-line
   const review = new Review(body);
   const savedReview = await review.save();

@@ -32,7 +32,6 @@ restaurantRouter.post('/', async (request, response) => {
   body.city = body.city.toLowerCase().trim();
   body.neighborhood = body.neighborhood.toLowerCase().trim();
   body.foodTypes = body.foodTypes.map((type) => type.toLowerCase().trim());
-
   const newRestaurant = new Restaurant(body);
   await newRestaurant.save();
   return response.json(newRestaurant);
