@@ -4,17 +4,17 @@ import {
 import { useState, React } from 'react';
 
 const ReviewCard = ({ review }) => {
-  const [showFull, setShowFull] = useState(false);
+  const [showMin, setShowFull] = useState(true);
 
   const toggleShow = () => {
-    setShowFull(!showFull);
+    setShowFull(!showMin);
   };
 
   const fullText = () => (
-    <Button onClick={toggleShow}> full text </Button>
+    <Button onClick={toggleShow}> collapse </Button>
   );
   const hide = () => (
-    <Button onClick={toggleShow}> hide </Button>
+    <Button onClick={toggleShow}> full text </Button>
   );
 
   return (
@@ -26,13 +26,13 @@ const ReviewCard = ({ review }) => {
       />
       <CardContent>
         <Typography
-          style={showFull ? { wordWrap: 'break-word' } : { wordWrap: 'normal' }}
           variant="body1"
+          noWrap={showMin}
           fontSize={20}
         >
           {review.content}
         </Typography>
-        {showFull ? hide() : fullText()}
+        {showMin ? hide() : fullText()}
 
         <Typography variant="subtitle1" fontSize={15}>
           By:
