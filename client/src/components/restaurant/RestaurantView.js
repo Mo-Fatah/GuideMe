@@ -20,6 +20,10 @@ const RestaurantView = () => {
     return <div>loading...</div>;
   }
 
+  if (restaurant.error) {
+    return <strong>404 Restaurant not found</strong>;
+  }
+
   return (
     <div>
       <Typography variant="h1" marginTop={2} marginLeft={2}>
