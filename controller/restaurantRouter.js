@@ -13,7 +13,11 @@ restaurantRouter.get('/:id', async (request, response) => {
     .populate({
       path: 'reviews',
       model: 'Review',
-      populate: { path: 'user', model: 'User' },
+      populate: {
+        path: 'user',
+        model: 'User',
+        select: 'username',
+      },
     });
   response.json(result);
 });

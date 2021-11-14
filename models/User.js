@@ -16,8 +16,8 @@ const userSchema = mongoose.Schema({
     required: true,
   },
   postedReviews: [{
-    type: Map,
-    of: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Review',
   }],
 });
 

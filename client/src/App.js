@@ -11,7 +11,8 @@ import RestaurantView from './components/restaurant/RestaurantView';
 import AddNewRest from './components/restaurant/AddNewRest';
 import CreateNewAccount from './components/CreateNewAccount';
 import Layout from './components/Layout/Layout';
-import Profile from './components/Profile';
+import Profile from './components/Profiles/Profile';
+import ReviewerProfile from './components/Profiles/ReviewerProfile';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -95,6 +96,9 @@ const App = () => {
           </Route>
           <Route path="/search">
             <SearchByFilters />
+          </Route>
+          <Route path="/user/:id">
+            <ReviewerProfile />
           </Route>
           <Route path="/logout" render={() => handleLogOut()} />
           <Route path="/">

@@ -16,7 +16,9 @@ const initialRestaurants = [
     foodTypes: ['kebda'],
   },
 ];
-
+const sleep = async (ms) => {
+  await setTimeout(() => {}, ms);
+}
 module.exports = {
   initialRestaurants,
 };

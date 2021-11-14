@@ -2,6 +2,7 @@ import {
   Card, CardContent, CardHeader, Typography, Button,
 } from '@mui/material';
 import { useState, React } from 'react';
+import { Link } from 'react-router-dom';
 
 const ReviewCard = ({ review }) => {
   const [showMin, setShowFull] = useState(true);
@@ -36,7 +37,9 @@ const ReviewCard = ({ review }) => {
 
         <Typography variant="subtitle1" fontSize={15}>
           By:
-          {review.user.username}
+          <Button component={Link} to={`/user/${review.user.id}`}>
+            {review.user.username}
+          </Button>
         </Typography>
       </CardContent>
     </Card>

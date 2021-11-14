@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = '/api/review';
+const baseUrl = 'http://localhost:3003/api/review';
 
 // eslint-disable-next-line
 export const addReview = async (review, id, userToken) => {

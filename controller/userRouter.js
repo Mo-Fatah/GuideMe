@@ -27,4 +27,10 @@ userRouter.post('/', async (request, response) => {
   return response.json(newUser);
 });
 
+userRouter.get('/:id', async (request, response) => {
+  const { id } = request.params;
+  const user = await User.findById(id).populate('postedReviews');
+  response.json(user);
+});
+
 module.exports = userRouter;

@@ -49,6 +49,18 @@ test('non-unique usernames should not be accepted', async () => {
     .expect(401);
 });
 
+test('a user can be requested by unique id, otherwise error', async () => {
+  const user = {
+    username: 'peter',
+    password: '123456789',
+  };
+  const newUser = await api.post('/api/user').send(user);
+  const correctResult = await api.get(`/api/user/${newUser.body.id}`);
+  const wrongResult = await api.get(`/api/user/${newUser.body.id}12`);
+  expect(correctResult.body.username).toBe(newUser.body.username);
+  expect(wrongResult.body.error).toBeDefined();
+}, 20000);
+
 afterAll(async () => {
   await mongoose.connection.close();
 });
