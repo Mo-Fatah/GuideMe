@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3003/api/user';
+const baseUrl = '/api/user';
 
 // eslint-disable-next-line
 export const createNew = async (newUser) => {
@@ -9,6 +9,6 @@ export const createNew = async (newUser) => {
 };
 
 export const getUser = async (id) => {
-  const result = await axios.get(`baseUrl/${id}`);
+  const result = await axios.get(`${baseUrl}/${id}`);
   return result.data;
 };

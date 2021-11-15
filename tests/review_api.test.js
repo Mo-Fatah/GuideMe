@@ -30,12 +30,14 @@ test('valid user can post a review for existing restaurant', async () => {
     .set('Authorization', `bearer ${loggedUser.token}`)
     .send(review);
 
+  await helper.sleep(5000);
+
   const resultRest = await api.get(`/api/food/${newRest.id}`);
   const titles = resultRest.body.reviews.map((r) => r.title);
   const users = resultRest.body.reviews.map((r) => r.user.username);
   expect(titles).toContain(review.title);
   expect(users).toContain(loggedUser.username);
-});
+}, 10000);
 
 test('restaurant average rate is correct', async () => {
   let result = await api.post('/api/food/').send(helper.initialRestaurants[0]);
@@ -49,6 +51,7 @@ test('restaurant average rate is correct', async () => {
     content: 'good',
     rate: 4,
   };
+
   await api
     .post(`/api/review/${newRest.id}`)
     .set('Authorization', `bearer ${loggedUser.token}`)
@@ -64,9 +67,11 @@ test('restaurant average rate is correct', async () => {
     .set('Authorization', `bearer ${loggedUser.token}`)
     .send(review2);
 
+  await helper.sleep(5000);
+
   const resultRest = await api.get(`/api/food/${newRest.id}`);
   expect(resultRest.body.rate).toBe(6);
-}, 20000);
+}, 10000);
 
 test('review posted to the reivewer\'s postedReviews', async () => {
   let result = await api.post('/api/food/').send(helper.initialRestaurants[0]);
@@ -86,13 +91,15 @@ test('review posted to the reivewer\'s postedReviews', async () => {
     .set('Authorization', `bearer ${loggedUser.token}`)
     .send(review);
 
+  await helper.sleep(5000);
+
   result = await api.get(`/api/user/${loggedUser.id}`);
   const reviews = result.body.postedReviews.map((r) => r.title);
   const contents = result.body.postedReviews.map((r) => r.content);
   expect(reviews).toContain('title');
   expect(contents).toContain('good');
-});
+}, 20000);
 
 afterAll(async () => {
   await mongoose.connection.close();
-});
+}, 10000);

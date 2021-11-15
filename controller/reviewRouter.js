@@ -25,6 +25,7 @@ reviewRouter.post('/:id', async (request, response) => {
   const review = new Review(body);
   const savedReview = await review.save();
   await savedReview.populate('user');
+  response.json(savedReview); // sending response to the UI here to reduce delay time
 
   // saving review to the restaurant's reviews and to the user's postedReviews
   const restaurant = await Restaurant.findById(id);
@@ -38,7 +39,6 @@ reviewRouter.post('/:id', async (request, response) => {
   await restaurant.save();
   await user.save();
 
-  response.json(savedReview);
 });
 
 module.exports = reviewRouter;
