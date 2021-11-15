@@ -38,7 +38,6 @@ reviewRouter.post('/:id', async (request, response) => {
   restaurant.reviews = restaurant.reviews.concat(savedReview._id);
   await restaurant.save();
   await user.save();
-
 });
 
 module.exports = reviewRouter;

@@ -16,9 +16,7 @@ const initialRestaurants = [
     foodTypes: ['kebda'],
   },
 ];
-const sleep = (ms) => {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 module.exports = {
   initialRestaurants,
