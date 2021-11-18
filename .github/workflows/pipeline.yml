@@ -13,9 +13,6 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
       - name: ESlint
         run: npm run lint && cd client && npm run lint && cd ..
 
@@ -30,8 +27,9 @@ jobs:
           MONGODB_URI_TEST: ${{ MONGODB_URI_TEST }}
       
       - name: Running Tests in Container
-        run: docker run -d --name guideme-container guideme
-        run: docker exec guideme-container npm run test
+        run: |
+          docker run -d --name guideme-container guideme
+          docker exec guideme-container npm run test
 
       - name: Deploy to Heroku
         if: ${{ github.event_name == 'push' }} 
