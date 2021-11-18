@@ -6,7 +6,7 @@ COPY . .
 
 RUN cd client && npm ci
 
-# see BasicPipeline.yml for explanation of the next line
+# see ./.github/workflows/BasicPipeline.yml for explanation of the next line
 RUN cd client && echo SKIP_PREFLIGHT_CHECK=true >> .env 
 
 RUN npm run build:ui

@@ -1,4 +1,4 @@
-name: Deployment Pipeline
+name: Continer Deployment Pipeline
 
 on: 
   push:
@@ -8,8 +8,22 @@ on:
     branches: [main]
     types: [opened, synchronize]
 
+  
+
 jobs:
-  simplePipeline:
+  Code Styling:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: npm install
+        run: npm instll 
+      - name: Eslint
+        run : npm run lint && cd client && npm run lint && cd .. 
+  
+
+  Buidling The Image, Test, Deploy:
+    needs: Code Styling 
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -24,7 +38,6 @@ jobs:
       - name: Running Tests in Container
         run: |
           docker run -d --name guideme-container guideme
-          docker exec guideme-container printenv
           docker exec guideme-container npm run test
 
       - name: Deploy to Heroku
