@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '12.x'
       - name: npm install
-        run: npm install && cd client && npm install & cd ..
+        run: npm install && cd client && npm install && cd ..
       - name: Eslint
         run : npm run lint && cd client && npm run lint && cd .. 
   
