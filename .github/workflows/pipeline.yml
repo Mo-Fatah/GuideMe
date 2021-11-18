@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+      - name: npm install
+        run: npm install && cd client && npm install && cd ..
+
       - name: ESlint
         run: npm run lint && cd client && npm run lint && cd ..
 
