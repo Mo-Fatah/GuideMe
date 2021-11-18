@@ -40,18 +40,17 @@ jobs:
           heroku_email: "mohamedabdelfatah2027@gmail.com"
           checkstring: "ok"
           usedocker: true
+          rollbackonhealthcheckfailed: true
           docker_build_args: |
-            NODE_ENV
             NODE_ENV
             MONGODB_URI
             MONGODB_URI_TEST
             SECRET
-          env:
-            NODE_ENV: production
-            MONGODB_URI: ${{ secrets.MONGODB_URI }}
-            MONGODB_URI_TEST: ${{ secrets.MONGODB_URI_TEST }}
-            SECRET: ${{ secrets.SECRET }}
-            rollbackonhealthcheckfailed: true
+        env:
+          NODE_ENV: production
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_URI_TEST: ${{ secrets.MONGODB_URI_TEST }}
+          SECRET: ${{ secrets.SECRET }}
       
  
 
