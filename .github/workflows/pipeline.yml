@@ -16,30 +16,44 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: npm install
-        # the "echo" command in the next line is a workaround for a bug in the dependecy tree caused by babel-jest
-        # see more https://stackoverflow.com/a/57089043/12019806 
-        run: npm install && cd client && echo SKIP_PREFLIGHT_CHECK=true >> .env && npm install cd ..  
-      - name: Backend Test
-        run: npm run test
-        env:
-          MONGODB_URI_TEST: ${{secrets.MONGODB_URI_TEST}}
-          SECRET: ${{secrets.SECRET}}
       - name: ESlint
         run: npm run lint && cd client && npm run lint && cd ..
-      - name: Build
-        run: npm run build:ui
+
+      - name: Building Docker Image
+        run: docker build -t guideme . \
+            --build-arg MONGODB_URI="$MONGODB_URI" \
+            --build-arg SECRET="$SECRET" \
+            --build-arg MONGODB_URI_TEST="MONGODB_URI_TEST"
+        env:
+          MONGODB_URI: ${{secrets.MONGODB_URI}}
+          SECRET: ${{secrets.SECRET}}
+          MONGODB_URI_TEST: ${{ MONGODB_URI_TEST }}
+      
+      - name: Running Tests in Container
+        run: docker run -d --name guideme-container guideme
+        run: docker exec guideme-container npm run test
 
       - name: Deploy to Heroku
         if: ${{ github.event_name == 'push' }} 
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pure-headland-21885" 
+          heroku_app_name: "guideme-dockerized" 
           heroku_email: "mohamedabdelfatah2027@gmail.com"
-          healthcheck: "https://pure-headland-21885.herokuapp.com/health"
           checkstring: "ok"
-          rollbackonhealthcheckfailed: true
+          usedocker: true
+          docker_build_args: |
+            NODE_ENV
+            NODE_ENV
+            MONGODB_URI
+            MONGODB_URI_TEST
+            SECRET
+          env:
+            NODE_ENV: production
+            MONGODB_URI: ${{ secrets.MONGODB_URI }}
+            MONGODB_URI_TEST: ${{ secrets.MONGODB_URI_TEST }}
+            SECRET: ${{ secrets.SECRET }}
+            rollbackonhealthcheckfailed: true
       
  
 
