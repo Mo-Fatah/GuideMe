@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: npm install
-        run: npm instll 
+        run: npm install 
       - name: Eslint
         run : npm run lint && cd client && npm run lint && cd .. 
   
