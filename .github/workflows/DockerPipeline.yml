@@ -13,11 +13,6 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: npm install
-        run: npm install && cd client && npm install && cd ..
-
-      - name: ESlint
-        run: npm run lint && cd client && npm run lint && cd ..
 
       - name: Building Docker Image
         run: docker build -t guideme . --build-arg MONGODB_URI="$MONGODB_URI" --build-arg SECRET="$SECRET" --build-arg MONGODB_URI_TEST="MONGODB_URI_TEST"
@@ -26,6 +21,8 @@ jobs:
           SECRET: ${{secrets.SECRET}}
           MONGODB_URI_TEST: ${{ secrets.MONGODB_URI_TEST }}
       
+      - name: Show Env vaiables
+        run: printenv
       - name: Running Tests in Container
         run: |
           docker run -d --name guideme-container guideme
