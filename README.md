@@ -1,6 +1,10 @@
-# GuideMe
+# [GuideMe](https://guideme-dockerized.herokuapp.com/)
+
 A Services reviews web App. This a fullstack-single-page App using MERN stack.
 This repository includes both the Backend and Frontend (client directory)
+> **_Update:_** Docker is Here! The application now is containerized. All test cases are run in the Container, and the whole application is deployed as a docker container.
+
+> **_NOTE:_**  The Appliction still lacks some styling and aesthetics. 
 
 ## Tech Stack
 
@@ -17,22 +21,24 @@ This repository includes both the Backend and Frontend (client directory)
 - MaterialUI for styling
 
 ### Tools
+- Docker
 - Github Action for CI/CD
 - Eslint for code styling
 - Heroku (Deployment platform)
 
 ## Launching The APP
-To launch the App in your local machine: 
-  - first clone the Repository 
-  - `npm install && cd client && npm install` 
-  - create `.env` file in the root directory and provide the following 
-   ```bash
-    MONGODB_URI='Your MongoDB URI'
-    SECRET='Your Secret word for Token generation'
-    MONGODB_URI_TEST='Your MongoDB-Testing database for running tests'
-   ```
-  - launch the server in dev mode by `npm run dev`
-  - launch the frontend by `npm start` from the client directory
-
-## Final Note
-This my first fullstack project, I really appreciat your feedback and I am really welcoming any notes to make a progress in my journey as a Software Engineer. 
+To launch the App on your local machine: 
+  - Clone the repository 
+  - Make sure that you have Docker installed on your local machine
+  - Run the following command with the right args in the Project's root directory
+    ```
+    docker build -t guideme . \
+    --build-arg MONGODB_URI="Your MongoDb URI" \
+    --build-arg SECRET="Your Secret Word for token Generation" \
+    --build-arg MONGODB_URI_TEST="Your MongoDB-Testing database for running tests"
+    ```
+  - Run the Following command (Replce PORT with an available port on your machine)
+    ```
+    docker run -p PORT:3003 guideme
+    ```
+  - Congratulations! The application is running now on PORT
