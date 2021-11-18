@@ -11,7 +11,7 @@ on:
   
 
 jobs:
-  Code Styling:
+  CodeStyling:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -22,8 +22,8 @@ jobs:
         run : npm run lint && cd client && npm run lint && cd .. 
   
 
-  Buidling The Image, Test, Deploy:
-    needs: Code Styling 
+  ImageBuildTestDeploy:
+    needs: CodeStyling 
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
