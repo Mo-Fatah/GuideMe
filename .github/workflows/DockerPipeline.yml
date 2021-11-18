@@ -21,11 +21,10 @@ jobs:
           SECRET: ${{secrets.SECRET}}
           MONGODB_URI_TEST: ${{ secrets.MONGODB_URI_TEST }}
       
-      - name: Show Env vaiables
-        run: printenv
       - name: Running Tests in Container
         run: |
           docker run -d --name guideme-container guideme
+          docker exec guideme-container printenv
           docker exec guideme-container npm run test
 
       - name: Deploy to Heroku
