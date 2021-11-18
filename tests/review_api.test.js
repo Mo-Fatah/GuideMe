@@ -37,7 +37,7 @@ test('valid user can post a review for existing restaurant', async () => {
   const users = resultRest.body.reviews.map((r) => r.user.username);
   expect(titles).toContain(review.title);
   expect(users).toContain(loggedUser.username);
-}, 10000);
+}, 20000);
 
 test('restaurant average rate is correct', async () => {
   let result = await api.post('/api/food/').send(helper.initialRestaurants[0]);
@@ -71,7 +71,7 @@ test('restaurant average rate is correct', async () => {
 
   const resultRest = await api.get(`/api/food/${newRest.id}`);
   expect(resultRest.body.rate).toBe(6);
-}, 10000);
+}, 20000);
 
 test('review posted to the reivewer\'s postedReviews', async () => {
   let result = await api.post('/api/food/').send(helper.initialRestaurants[0]);
