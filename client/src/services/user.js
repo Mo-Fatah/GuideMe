@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = process.env === 'production'
-  ? '/api/user'
-  : 'http://localhost:3003/api/user';
+const baseUrl = '/api/user';
 
 // eslint-disable-next-line
 export const createNew = async (newUser) => {

@@ -33,6 +33,7 @@ test('valid user can post a review for existing restaurant', async () => {
   await helper.sleep(5000);
 
   const resultRest = await api.get(`/api/food/${newRest.id}`);
+  console.log(resultRest.body);
   const titles = resultRest.body.reviews.map((r) => r.title);
   const users = resultRest.body.reviews.map((r) => r.user.username);
   expect(titles).toContain(review.title);
