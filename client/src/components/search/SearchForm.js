@@ -28,22 +28,10 @@ const SearchForm = ({ search }) => {
         onChange={({ target }) => setName(target.value)}
       />
       <TextField
-        label="Governorate"
-        value={governorate}
-        variant="outlined"
-        onChange={({ target }) => setGovern(target.value)}
-      />
-      <TextField
         label="City"
         value={city}
         variant="outlined"
         onChange={({ target }) => setCity(target.value)}
-      />
-      <TextField
-        label="Neighborhood"
-        value={neighborhood}
-        variant="outlined"
-        onChange={({ target }) => setNeighborhood(target.value)}
       />
       <br />
       <Button
