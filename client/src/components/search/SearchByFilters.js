@@ -21,7 +21,7 @@ const SearchByFilters = () => {
         Search for Restaurants by location
       </Typography>
       <Alert severity="info" style={{ marginBottom: 10 }}>
-        All fields are optional. If you want all restaurants leave search fields empty
+        All fields are optional
       </Alert>
 
       <SearchForm search={SearchQuery} />
