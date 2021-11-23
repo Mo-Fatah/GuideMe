@@ -30,17 +30,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Building Docker Image
+      - name: Building/Testing Docker Image 
         run: docker build -t guideme . --build-arg MONGODB_URI="$MONGODB_URI" --build-arg SECRET="$SECRET" --build-arg MONGODB_URI_TEST="$MONGODB_URI_TEST"
         env:
           MONGODB_URI: ${{secrets.MONGODB_URI}}
           SECRET: ${{secrets.SECRET}}
           MONGODB_URI_TEST: ${{ secrets.MONGODB_URI_TEST }}
-      
-      - name: Running Tests in Container
-        run: |
-          docker run -d --name guideme-container guideme
-          docker exec guideme-container npm run test
 
       - name: Deploy to Heroku
         if: ${{ github.event_name == 'push' }} 
