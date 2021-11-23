@@ -86,7 +86,7 @@ const StyledButton = ({ images }) => {
           component={Link}
           to='/search'
         >
-          <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
+          { image.url && <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />}
           <ImageBackdrop className="MuiImageBackdrop-root" />
           <Image>
             <Typography
