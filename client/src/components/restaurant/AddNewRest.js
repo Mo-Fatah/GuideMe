@@ -42,6 +42,7 @@ const AddNewRest = () => {
     setCity('');
     setAddress('');
     setFoodType('');
+    setNeighborhood('');
     setFoodTypes([]);
     setMessage(`Thanks for Your Contribution! you can find ${restaurant.name} now in the search result`);
   };

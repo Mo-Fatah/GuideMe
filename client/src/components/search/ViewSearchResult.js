@@ -5,7 +5,6 @@ const ViewSearchResult = ({ result }) => {
   if (!result) {
     return null;
   }
-
   if (result.length === 0) {
     return <div>No result found :(</div>;
   }
