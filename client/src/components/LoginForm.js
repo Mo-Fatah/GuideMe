@@ -61,6 +61,7 @@ const LoginForm = ({ setUser }) => {
         />
         <TextField
           label="password"
+          type="password"
           value={password}
           variant="outlined"
           onChange={({ target }) => setPassword(target.value)}
