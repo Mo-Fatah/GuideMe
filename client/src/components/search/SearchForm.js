@@ -3,20 +3,16 @@ import { useState, React } from 'react';
 
 const SearchForm = ({ search }) => {
   const [name, setName] = useState('');
-  const [governorate, setGovern] = useState('');
   const [city, setCity] = useState('');
-  const [neighborhood, setNeighborhood] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const queryParams = {};
     if (name.trim()) queryParams.name = name.toLowerCase().trim();
-    if (governorate.trim()) queryParams.governorate = governorate.toLowerCase().trim();
     if (city.trim()) queryParams.city = city.toLowerCase().trim();
-    if (neighborhood.trim()) queryParams.neighborhood = neighborhood.toLowerCase().trim();
-
-    search(queryParams);
-    setCity(''); setGovern(''); setName(''); setNeighborhood('');
+    await search(queryParams);
+    setCity('');
+    setName('');
   };
 
   return (
